@@ -9,6 +9,7 @@ import java.sql.SQLException;
  * Authentication class for user validation
  */
 public class Authenticator {
+<<<<<<< HEAD
 
     private static String sanitize(String input
 
@@ -27,6 +28,24 @@ public class Authenticator {
                 "root","root")) {
             try(var statement = conn.createStatement()) {
                 var query = "SELECT * FROM user_data WHERE username = '" + username + "'AND password = '" + password + "'";
+=======
+    /**
+     * Authenticates a user by checking username and password against database
+     *
+     * @param username The username to authenticate
+     * @param password The password to authenticate
+     * @return boolean Returns true if authentication successful, false otherwise
+     * @throws RuntimeException if there is a SQL error during authentication
+     */
+    public static boolean authenticateUser(String username, String password) {
+        try(var conn = DBUtil.connect("jdbc:sqlite:src/main/resources/database/sample.db",
+                "root","root")) {
+            try(var statement = conn.createStatement()) {
+                var query = """
+                        SELECT * FROM user_data
+                        WHERE username =\s""" + "'" + username + "'"
+                        + "AND password = " + "'" + password + "'";
+>>>>>>> 21031b9 (Initial commit)
                 System.out.println(query);
                 ResultSet rs = statement.executeQuery(query);
 
